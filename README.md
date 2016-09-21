@@ -6,3 +6,4 @@ Collaborators
   - Andrey Campos Sánchez
   - Omar Segura Villegas
   - Carlos Artavia Pineda
+  - Gabriel Moreno Leiter
