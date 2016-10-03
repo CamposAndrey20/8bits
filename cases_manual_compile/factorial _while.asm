@@ -88,4 +88,4 @@ main:
 	PUSH 5
 	CALL fact_code 
 	CALL print_number;
-    HLT             ; Stop execution
+   	HLT             ; Stop execution

@@ -1,4 +1,4 @@
-.init:
+﻿.init:
      MOV D, 232
      JMP main
 ; Data Area
@@ -30,6 +30,7 @@ print_string:
 salute:
 	POP C
 	CALL print_string
+	PUSH .UNDEF
 	PUSH C
 	RET
 main:
