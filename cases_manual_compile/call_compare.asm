@@ -2,14 +2,18 @@
      MOV D, 232
      JMP main
 ; Data Area
-.main_data:
+main_data:
 .UNDEF: DB 255
 .main_string_01: DB "10>5="
 	 DB 0
 .main_string_02: DB "5>10="
 	 DB 0
+compare_data:
 .compare_int_01: DB 10d
 .compare_int_02: DB 5d
+
+compare_return: DB " "
+		 DB 0
 .compare_string_true: DB "true"
 	 DB 0
 .compare_string_false: DB "false"
@@ -44,30 +48,32 @@ compare:
   PUSH C
   SUB A, B
   JNC .greater
-  PUSH .compare_string_false
-  CALL print_string
-  POP A
+  MOV [compare_return], .compare_string_false
   RET
 
 
 .greater:
- 	PUSH .compare_string_true
-	CALL print_string
-	POP A
+ 	MOV [compare_return], .compare_string_true
 	RET
  
 main:
      PUSH .main_string_01
-	 CALL print_string
-	 POP A
+     CALL print_string
+     POP A
      PUSH .compare_int_01
      PUSH .compare_int_02
-	 CALL compare:
-	INC D
+     CALL compare
+     PUSH [compare_return]
+     CALL print_string
+     POP A
+     INC D
      PUSH .main_string_02
-	 CALL print_string
-	 POP A
+     CALL print_string
+     POP A
      PUSH .compare_int_02
      PUSH .compare_int_01
-	 CALL compare:
-	 HLT
+     CALL compare
+     PUSH [compare_return]
+     CALL print_string
+     POP A
+     HLT
