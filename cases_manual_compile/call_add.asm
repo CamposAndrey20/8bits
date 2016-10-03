@@ -7,8 +7,8 @@
 .main_string_01: DB "10+56="
 	 DB 0
 .add_data:
-.add_num_01: DB 10
-.add_num_02: DB 56
+add_num_01: DB 10
+add_num_02: DB 56
 add_return: DB 0
 ; Code Area Prólogo
 
@@ -69,8 +69,8 @@ main:
      	PUSH .main_string_01
     	CALL print_string
 	POP A
-	PUSH 10
-	PUSH 56
+	PUSH [add_num_01]
+	PUSH [add_num_02]
 	CALL add
 	PUSH [add_return]
 	CALL print_number
