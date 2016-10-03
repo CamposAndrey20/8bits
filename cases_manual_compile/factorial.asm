@@ -4,7 +4,6 @@
 
 .fact_data:
 	fact_n: DB 0;
-	fact_return: DB 0;
 .main_data:
 .UNDEF: DB 255
 .main_string_01: DB "fact(5)="
@@ -25,17 +24,22 @@ fact_code:
 	DEC A;
 	PUSH A;
 	CALL fact_code;
-
+	
+	POP C;
 	POP A;
 	MOV [fact_n], A;
 	
 	MOV A,[fact_n];
-	MUL [fact_return];
-	MOV [fact_return], A;
+	MUL C;
+	POP C;
+	PUSH A;
+	PUSH C;
 	RET;
 
 true:
-	MOV [fact_return], 1;
+	POP C;
+	PUSH 1;
+	PUSH C;
 	RET;
 	
 print_number:
@@ -88,6 +92,5 @@ main:
 	CALL print_string
 	PUSH 5
 	CALL fact_code 
-	PUSH [fact_return]
 	CALL print_number;
         HLT             ; Stop execution
